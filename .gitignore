@@ -1,8 +1,11 @@
 app/config.local.php
-uploads/*
+uploads/**
 !uploads/.gitkeep
+!uploads/projects/
 !uploads/projects/.gitkeep
+!uploads/clients/
 !uploads/clients/.gitkeep
+!uploads/services/
 !uploads/services/.gitkeep
 .DS_Store
 *.log

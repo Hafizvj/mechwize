@@ -25,9 +25,10 @@ require __DIR__ . '/includes/header.php';
         ]); ?>
         <p class="eyebrow">Get in touch</p>
         <h1>Discuss your HVAC project, service or procurement need.</h1>
+        <p class="lead">Share site details, system type or spare-part requirements — the Mechwize team will respond with the next technical step.</p>
     </div>
 </section>
-<section class="section compact">
+<section class="section compact contact-section">
     <div class="container contact-grid">
         <div class="reveal">
             <div class="contact-cards">

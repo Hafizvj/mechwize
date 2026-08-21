@@ -7,6 +7,15 @@ require __DIR__ . '/includes/partials.php';
 
 $slug = trim((string) ($_GET['slug'] ?? ''));
 
+$serviceFallbacks = [
+    'assets/images/service-chiller.jpg',
+    'assets/images/service-precision.jpg',
+    'assets/images/service-warehouse.jpg',
+    'assets/images/service-rooftop.jpg',
+    'assets/images/unit-turnkey.jpg',
+    'assets/images/unit-services.jpg',
+];
+
 if ($slug !== '') {
     $service = get_service_by_slug($slug);
     if (!$service) {
@@ -21,11 +30,13 @@ if ($slug !== '') {
         ['name' => $service['title'], 'url' => '/services/' . $service['slug']],
     ];
 
+    $detailImage = $service['hero_image'] ?: $serviceFallbacks[0];
+
     $seo = seo_defaults([
         'title' => $service['seo_title'] ?: ($service['title'] . ' | Mechwize Group'),
         'description' => $service['seo_description'] ?: $service['summary'],
         'keywords' => $service['seo_keywords'] ?? '',
-        'image' => $service['og_image'] ?: ($service['hero_image'] ?: null),
+        'image' => $service['og_image'] ?: ($service['hero_image'] ?: $detailImage),
         'canonical' => absolute_url('/services/' . $service['slug']),
         'type' => 'article',
         'json_ld' => [
@@ -51,18 +62,21 @@ if ($slug !== '') {
         </div>
     </section>
     <section class="section compact">
-        <div class="container split-grid">
+        <div class="container split-media">
+            <div class="media-frame reveal">
+                <img src="<?= e(asset((string) $detailImage)); ?>" alt="<?= e($service['title']); ?>" loading="lazy" width="900" height="600">
+            </div>
             <div class="reveal">
                 <?= nl2p((string) $service['body']); ?>
+                <div class="feature-list" style="margin-top:1.5rem;">
+                    <?php foreach (($service['features'] ?? []) as $feature): ?>
+                        <div>
+                            <strong>Capability</strong>
+                            <span><?= e((string) $feature); ?></span>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
                 <p style="margin-top:1.5rem;"><a class="button primary" href="<?= e(url('/contact')); ?>">Request this service</a></p>
-            </div>
-            <div class="feature-list reveal">
-                <?php foreach (($service['features'] ?? []) as $feature): ?>
-                    <div>
-                        <strong>Capability</strong>
-                        <span><?= e((string) $feature); ?></span>
-                    </div>
-                <?php endforeach; ?>
             </div>
         </div>
     </section>
@@ -74,11 +88,17 @@ if ($slug !== '') {
                 <h2>More HVAC capabilities</h2>
             </div>
             <div class="card-grid three">
-                <?php foreach ($related as $item): ?>
-                    <a class="service-card" href="<?= e(url('/services/' . $item['slug'])); ?>">
-                        <span class="card-label"><?= e((string) $item['category']); ?></span>
-                        <h3><?= e($item['title']); ?></h3>
-                        <p><?= e($item['summary']); ?></p>
+                <?php foreach ($related as $ri => $item): ?>
+                    <?php $img = !empty($item['hero_image']) ? (string) $item['hero_image'] : $serviceFallbacks[($ri + 1) % count($serviceFallbacks)]; ?>
+                    <a class="service-card has-media reveal" href="<?= e(url('/services/' . $item['slug'])); ?>">
+                        <div class="card-media">
+                            <img src="<?= e(asset($img)); ?>" alt="" loading="lazy" width="640" height="360">
+                        </div>
+                        <div class="card-body">
+                            <span class="card-label"><?= e((string) $item['category']); ?></span>
+                            <h3><?= e($item['title']); ?></h3>
+                            <p><?= e($item['summary']); ?></p>
+                        </div>
                     </a>
                 <?php endforeach; ?>
             </div>
@@ -95,6 +115,7 @@ $seo = seo_defaults([
     'title' => 'HVAC Services Dubai & UAE | Mechwize Group',
     'description' => 'Explore Mechwize HVAC services including turnkey cooling, chiller services, retrofit, critical cooling and procurement across the UAE.',
     'canonical' => absolute_url('/services'),
+    'image' => asset('assets/images/service-chiller.jpg'),
 ]);
 
 require __DIR__ . '/includes/header.php';
@@ -112,11 +133,21 @@ require __DIR__ . '/includes/header.php';
 </section>
 <section class="section compact">
     <div class="container card-grid three">
-        <?php foreach ($services as $service): ?>
-            <a class="service-card reveal" href="<?= e(url('/services/' . $service['slug'])); ?>">
-                <span class="card-label"><?= e((string) $service['category']); ?></span>
-                <h3><?= e($service['title']); ?></h3>
-                <p><?= e($service['summary']); ?></p>
+        <?php foreach (array_values($services) as $index => $service): ?>
+            <?php
+            $img = !empty($service['hero_image'])
+                ? (string) $service['hero_image']
+                : $serviceFallbacks[$index % count($serviceFallbacks)];
+            ?>
+            <a class="service-card has-media reveal" href="<?= e(url('/services/' . $service['slug'])); ?>">
+                <div class="card-media">
+                    <img src="<?= e(asset($img)); ?>" alt="" loading="lazy" width="640" height="360">
+                </div>
+                <div class="card-body">
+                    <span class="card-label"><?= e((string) $service['category']); ?></span>
+                    <h3><?= e($service['title']); ?></h3>
+                    <p><?= e($service['summary']); ?></p>
+                </div>
             </a>
         <?php endforeach; ?>
     </div>

@@ -1,24 +1,23 @@
-# Mechwize Group Website V2.1
+# Mechwize Group Website V2.2
 
 PHP + MySQL website for [mechwize.com](https://mechwize.com) designed for **Hostmaria shared Linux hosting**, synced from GitHub.
 
 ## Stack
 
 - PHP 8+ (plain PHP, no Composer required)
-- Remote MySQL only (Hostmaria / cloud DB)
-- HTML / CSS / JS frontend
+- **Remote MySQL only** (Hostmaria / cloud DB) — never use a local XAMPP database for this project
+- HTML / CSS / JS frontend (industrial B2B UI, Mechwize brand)
 - Admin CMS for services, projects, clients, contact settings and enquiries
 
-**Important:** This project does **not** use a local database. Forms and admin require configured remote MySQL credentials.
+**Important:** Forms and admin require configured Hostmaria MySQL credentials in `app/config.local.php` (gitignored).
 
 ## Brand
 
-Logo color tone used throughout:
-
+- Logo: `assets/images/logo-mechwize.png`
 - Black / near-black backgrounds
 - Deep emerald green accents
 - Gold / brass CTAs and highlights
-- Off-white body text
+- Stock HVAC/industrial media under `assets/images/` (see `assets/images/CREDITS.md`)
 
 ## Features
 
@@ -78,6 +77,8 @@ Change this password immediately after first login (update the `admins` table ha
 
 ## Local / env config alternative
 
+Local development must also point at the **Hostmaria cloud database** via `app/config.local.php` (or env vars below). Do not create or use a local MySQL database.
+
 If the host supports environment variables:
 
 - `MECHWIZE_DB_HOST`
@@ -93,7 +94,7 @@ If the host supports environment variables:
 ```text
 app/            PHP bootstrap, config, DB, SEO, auth, uploads
 admin/          CMS pages
-assets/         CSS, JS, logo
+assets/         CSS, JS, logo, stock images
 database/       schema.sql (import on Hostmaria only)
 includes/       public layout partials
 uploads/        runtime images (not committed)

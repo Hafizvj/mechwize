@@ -13,8 +13,8 @@ if (is_file($localConfig)) {
 
 return [
     'database' => [
-        'host' => getenv('localhost') ?: '',
-        'port' => (int) (getenv('44798') ?: 3306),
+        'host' => getenv('MECHWIZE_DB_HOST') ?: '',
+        'port' => (int) (getenv('MECHWIZE_DB_PORT') ?: 3306),
         'name' => getenv('MECHWIZE_DB_NAME') ?: '',
         'user' => getenv('MECHWIZE_DB_USER') ?: '',
         'password' => getenv('MECHWIZE_DB_PASS') ?: '',

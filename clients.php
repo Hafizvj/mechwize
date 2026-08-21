@@ -41,4 +41,13 @@ require __DIR__ . '/includes/header.php';
         <?php endforeach; ?>
     </div>
 </section>
+<section class="section compact contact-section">
+    <div class="container" style="text-align:center;">
+        <p class="eyebrow">Partner with Mechwize</p>
+        <h2>Need HVAC support for your facility?</h2>
+        <div class="hero-actions" style="justify-content:center;">
+            <a class="button primary" href="<?= e(url('/contact')); ?>">Request a quote</a>
+        </div>
+    </div>
+</section>
 <?php require __DIR__ . '/includes/footer.php'; ?>

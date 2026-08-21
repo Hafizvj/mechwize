@@ -10,7 +10,7 @@ function seo_defaults(array $overrides = []): array
         'title' => $settings['default_meta_title'] ?? 'Mechwize Group | HVAC Design, Technical Services & Procurement',
         'description' => $settings['default_meta_description'] ?? 'Mechwize Group provides HVAC design, turnkey solutions, technical services, retrofit, procurement and trading across the UAE and GCC.',
         'keywords' => 'HVAC Dubai, HVAC UAE, chiller services, critical cooling, evaporative cooling, Mechwize Group',
-        'image' => $settings['default_og_image'] ?? asset('assets/images/logo-hz.svg'),
+        'image' => $settings['default_og_image'] ?? asset('assets/images/logo-mechwize.png'),
         'url' => absolute_url(current_path()),
         'type' => 'website',
         'robots' => 'index,follow',
@@ -30,7 +30,7 @@ function organization_json_ld(): array
         '@type' => ['Organization', 'LocalBusiness'],
         'name' => 'Mechwize Group',
         'url' => absolute_url('/'),
-        'logo' => absolute_url(asset('assets/images/logo-hz.svg')),
+        'logo' => absolute_url(asset('assets/images/logo-mechwize.png')),
         'email' => $settings['email_primary'] ?? 'info@mechwize.com',
         'telephone' => $settings['phone_primary'] ?? '+971 54 736 6228',
         'address' => [

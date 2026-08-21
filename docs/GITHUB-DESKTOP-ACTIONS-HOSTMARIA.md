@@ -38,6 +38,7 @@ Repo → **Settings → Secrets and variables → Actions**
 - `app/config.local.php` is never uploaded (safe)
 - `uploads/` images on server are kept
 - DB content stays in Hostmaria MySQL
+- Public UI assets (`assets/css`, `assets/js`, `assets/images`) deploy with each push
 
 ## If deploy fails
 

@@ -28,14 +28,14 @@ function admin_header(string $title): void
     <title><?= e($title); ?> | Mechwize Admin</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&family=Outfit:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="<?= e(asset('assets/css/styles.css')); ?>">
 </head>
 <body class="admin-body">
 <div class="admin-shell">
     <aside class="admin-sidebar">
         <a href="<?= e(url('/admin/')); ?>" style="display:block;margin-bottom:1.25rem;">
-            <img src="<?= e(asset('assets/images/logo-hz.svg')); ?>" alt="Mechwize" style="height:36px;">
+            <img src="<?= e(asset('assets/images/logo-mechwize.png')); ?>" alt="Mechwize" style="height:36px;">
         </a>
         <?php foreach (admin_nav_items() as $file => $label): ?>
             <a class="<?= $current === $file ? 'is-active' : ''; ?>" href="<?= e(url('/admin/' . $file)); ?>"><?= e($label); ?></a>

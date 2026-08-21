@@ -10,7 +10,7 @@ Edit locally → GitHub Desktop push to main → Actions uploads to Hostmaria (F
 
 1. Create MySQL DB + import `database/schema.sql`
 2. On server: copy `app/config.example.php` → `app/config.local.php` and fill DB details
-3. Create FTP account in cPanel
+3. Create FTP account in cPanel with Directory set to `public_html` (so login already lands in the site root)
 
 ## 2. One-time GitHub secrets
 
@@ -23,7 +23,7 @@ Repo → **Settings → Secrets and variables → Actions**
 | `FTP_PASSWORD` | your FTP password |
 | `FTP_PORT` | `21` |
 | `FTP_PROTOCOL` | `ftps` (or `ftp`) |
-| `FTP_SERVER_DIR` | `/public_html/` |
+| `FTP_SERVER_DIR` | `/` |
 
 ## 3. Daily use (GitHub Desktop)
 
@@ -43,4 +43,4 @@ Repo → **Settings → Secrets and variables → Actions**
 
 - Wrong FTP secrets → test in FileZilla first
 - FTPS error → set `FTP_PROTOCOL` to `ftp`
-- Site unchanged → wrong `FTP_SERVER_DIR`
+- Site unchanged → wrong `FTP_SERVER_DIR`. If the FTP account already opens in `public_html`, use `/` (not `/public_html/`, or files land in `public_html/public_html`)

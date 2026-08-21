@@ -29,6 +29,12 @@ Logo color tone used throughout:
 
 ## Hostmaria deployment
 
+**Beginners:** follow the full click-by-click guide:
+
+- [`docs/HOSTMARIA-BEGINNER-GUIDE.md`](docs/HOSTMARIA-BEGINNER-GUIDE.md)
+
+Short version:
+
 1. Push this repository to GitHub.
 2. In Hostmaria / cPanel, deploy or sync the repo into the site document root (usually `public_html`).
 3. Create a MySQL database and user in Hostmaria.

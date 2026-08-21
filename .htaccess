@@ -1,0 +1,37 @@
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Force HTTPS when available behind shared hosting / proxy
+    RewriteCond %{HTTPS} !=on
+    RewriteCond %{HTTP:X-Forwarded-Proto} !https
+    RewriteCond %{HTTP_HOST} ^(www\.)?mechwize\.com$ [NC]
+    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+    RewriteRule ^sitemap\.xml$ sitemap.php [L]
+
+    RewriteRule ^services/?$ services.php [L,QSA]
+    RewriteRule ^services/([a-z0-9\-]+)/?$ services.php?slug=$1 [L,QSA]
+
+    RewriteRule ^projects/?$ projects.php [L,QSA]
+    RewriteRule ^projects/([a-z0-9\-]+)/?$ projects.php?slug=$1 [L,QSA]
+
+    RewriteRule ^clients/?$ clients.php [L,QSA]
+    RewriteRule ^about/?$ about.php [L,QSA]
+    RewriteRule ^contact/?$ contact.php [L,QSA]
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^.+$ 404.php [L]
+</IfModule>
+
+<IfModule mod_authz_core.c>
+    <FilesMatch "^(config\.local\.php)$">
+        Require all denied
+    </FilesMatch>
+</IfModule>
+
+RedirectMatch 403 ^/app/
+RedirectMatch 403 ^/database/
+RedirectMatch 403 ^/includes/

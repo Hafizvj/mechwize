@@ -29,11 +29,24 @@ Logo color tone used throughout:
 
 ## Hostmaria deployment
 
-**Beginners:** follow the full click-by-click guide:
+**Beginners — pick your path:**
 
-- [`docs/HOSTMARIA-BEGINNER-GUIDE.md`](docs/HOSTMARIA-BEGINNER-GUIDE.md)
+1. **GitHub Desktop + auto-deploy (recommended):**  
+   [`docs/GITHUB-DESKTOP-ACTIONS-HOSTMARIA.md`](docs/GITHUB-DESKTOP-ACTIONS-HOSTMARIA.md)
+2. **Manual Hostmaria files + database setup:**  
+   [`docs/HOSTMARIA-BEGINNER-GUIDE.md`](docs/HOSTMARIA-BEGINNER-GUIDE.md)
 
-Short version:
+### Auto-deploy overview
+
+```text
+GitHub Desktop push to main
+  → GitHub Actions
+    → FTP/FTPS upload to Hostmaria
+```
+
+Required GitHub Action secrets: `FTP_SERVER`, `FTP_USERNAME`, `FTP_PASSWORD`, `FTP_PORT`, `FTP_PROTOCOL`, `FTP_SERVER_DIR`.
+
+### Manual short version
 
 1. Push this repository to GitHub.
 2. In Hostmaria / cPanel, deploy or sync the repo into the site document root (usually `public_html`).

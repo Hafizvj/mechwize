@@ -389,9 +389,19 @@ If enquiry fails, almost always one of these is wrong:
 
 # PART H — Keep website updated from GitHub
 
-Whenever code is improved in GitHub:
+## Recommended: GitHub Desktop + GitHub Actions
 
-## If using Git Version Control
+For automatic deploys from your PC:
+
+- Follow [`GITHUB-DESKTOP-ACTIONS-HOSTMARIA.md`](GITHUB-DESKTOP-ACTIONS-HOSTMARIA.md)
+
+Flow:
+
+1. Edit locally
+2. Commit + Push with GitHub Desktop to `main`
+3. GitHub Actions uploads files to Hostmaria by FTP/FTPS
+
+## Alternative: cPanel Git Version Control
 
 1. cPanel → Git Version Control
 2. Open mechwize repository
@@ -400,7 +410,7 @@ Whenever code is improved in GitHub:
 
 ## Important
 
-- Pulling code will **not** normally overwrite `app/config.local.php` (it is ignored by Git)
+- Deploys will **not** overwrite `app/config.local.php` (excluded from Git/Actions)
 - Uploaded images in `uploads/` stay on the server
 - Database content (projects/clients/enquiries) stays in MySQL
 

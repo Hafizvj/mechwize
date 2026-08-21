@@ -1,0 +1,45 @@
+name: Deploy to Hostmaria
+
+# On shared hosting, Actions uploads files by FTP/FTPS (it does not run git pull on the server).
+# Trigger: every push to main, or manual "Run workflow".
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-hostmaria
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    name: Upload site files to Hostmaria
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Deploy via FTPS
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          port: ${{ secrets.FTP_PORT }}
+          protocol: ${{ secrets.FTP_PROTOCOL }}
+          server-dir: ${{ secrets.FTP_SERVER_DIR }}
+          security: loose
+          timeout: 600000
+          exclude: |
+            **/.git*
+            **/.git*/**
+            .github/**
+            docs/**
+            app/config.local.php
+            uploads/projects/**
+            uploads/clients/**
+            uploads/services/**
+            **/.DS_Store
+            **/Thumbs.db

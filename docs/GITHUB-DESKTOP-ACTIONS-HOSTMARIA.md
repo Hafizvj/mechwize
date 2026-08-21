@@ -41,6 +41,13 @@ Repo → **Settings → Secrets and variables → Actions**
 
 ## If deploy fails
 
-- Wrong FTP secrets → test in FileZilla first
+- **`530 Login failed` / FTP locking** (most common on Hostmaria): GitHub Actions uses a different IP than your PC. Unlock FTP **by time**, not by your home IP.
+  1. Log in to https://stackcp.com
+  2. **Manage Hosting** → your package → **Manage**
+  3. On the FTP panel, **Unlock FTP by time** (pick the longest option, e.g. 24 hours)
+  4. Copy **FTP Server / Username / Password** from that same FTP Details box into GitHub secrets (no extra spaces)
+  5. Re-run the failed workflow (Actions → failed run → **Re-run jobs**)
+- Unlocking by IP will still fail: that only allows *your* computer, not GitHub.
+- Wrong FTP secrets → test in FileZilla first using the StackCP FTP Details
 - FTPS error → set `FTP_PROTOCOL` to `ftp`
 - Site unchanged → wrong `FTP_SERVER_DIR`. If the FTP account already opens in `public_html`, use `/` (not `/public_html/`, or files land in `public_html/public_html`)

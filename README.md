@@ -1,4 +1,4 @@
-# Mechwize Group Website V2
+# Mechwize Group Website V2.1
 
 PHP + MySQL website for [mechwize.com](https://mechwize.com) designed for **Hostmaria shared Linux hosting**, synced from GitHub.
 
